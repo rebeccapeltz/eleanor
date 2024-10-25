@@ -1,16 +1,34 @@
 import "./index.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("test");
   const [transcript, setTranscript] = useState("");
+
+  // useEffect(() => {
+  //   fetch("http://localhost:8888/.netlify/functions/hello")
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       debugger
+  //       let output = json.message;
+  //       let outputLessQuotes = output.substring(1, output.length-3);
+  //       setTranscript(outputLessQuotes);
+  //       setResponse(outputLessQuotes);
+  //     })
+  //     .catch((error) => console.error(error));
+
+  //   return () => {
+  //     console.log("App is unmounting");
+  //   };
+  // }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform your logic to generate the response based on the prompt
     const generatedResponse = "response"; //generateResponse(prompt); // Replace with your actual response generation logic
     setResponse(generatedResponse);
-    setTranscript(transcript + '\n' + generatedResponse)
+    setTranscript(transcript + "\n" + generatedResponse);
   };
 
   return (
@@ -38,35 +56,34 @@ function App() {
       {/* <form onSubmit={handleSubmit}> */}
 
       <div className="container">
-          <div className="column">
-            <textarea
-              placeholder="Column 1 Text Area"
-              id="prompt"
-              name="prompt"
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              required
-            ></textarea>
-          </div>
+        <div className="column">
+          <textarea
+            placeholder="Column 1 Text Area"
+            id="prompt"
+            name="prompt"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            required
+          ></textarea>
+        </div>
 
-          <button onClick={handleSubmit} className="submit-button">
-            Engage <span className="arrow">→</span>
-          </button>
+        <button onClick={handleSubmit} className="submit-button">
+          Engage <span className="arrow">→</span>
+        </button>
 
-          <div className="column">
-            <textarea
-              readOnly
-              placeholder="Column 2 Text Area"
-              value={response}
-            ></textarea>
-          </div>
-      
+        <div className="column">
+          <textarea
+            readOnly
+            placeholder="Column 2 Text Area"
+            value={response}
+          ></textarea>
+        </div>
       </div>
       {/* </form> */}
 
       <div className="column">
-        <p className="transcript">Transcript</p>
-        <textarea readOnly defaultValue={transcript}></textarea>
+        <p >Transcript</p>
+        <textarea className="transcript" readOnly defaultValue={transcript}></textarea>
       </div>
     </div>
   );

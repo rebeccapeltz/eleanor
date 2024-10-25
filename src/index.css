@@ -16,7 +16,7 @@ h4 {
 }
 
 .description {
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
   font-weight: 550;
 }
@@ -97,3 +97,6 @@ a:active {
   ;
 }
 
+transcript {
+  
+}
