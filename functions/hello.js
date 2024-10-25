@@ -20,13 +20,15 @@ exports.handler = async (event, context) => {
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const prompt = introductionPrompt;
   
-  const result = await model.generateContent(prompt);
+  // const result = await model.generateContent(prompt);
+
 
   return {
     statusCode: 200,
     headers,
     body: JSON.stringify({
-      message: result.response.text(),
+      // message: result.response.text(),
+      message: 'hello'
     }),
   };
 };

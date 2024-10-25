@@ -1,27 +1,36 @@
-import "./index.css";
+import "./App.css";
 import React, { useState, useEffect } from "react";
 
 function App() {
   const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("test");
+  const [response, setResponse] = useState("Eleanor");
   const [transcript, setTranscript] = useState("");
 
-  // useEffect(() => {
-  //   fetch("http://localhost:8888/.netlify/functions/hello")
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       debugger
-  //       let output = json.message;
-  //       let outputLessQuotes = output.substring(1, output.length-3);
-  //       setTranscript(outputLessQuotes);
-  //       setResponse(outputLessQuotes);
-  //     })
-  //     .catch((error) => console.error(error));
+  useEffect(() => {
+    // fetch("http://localhost:8888/.netlify/functions/hello")
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     debugger
+    //     let output = json.message;
+    //     let outputLessQuotes = output.substring(1, output.length-3);
+    //     setTranscript(outputLessQuotes);
+    //     setResponse(outputLessQuotes);
+    //   })
+    //   .catch((error) => console.error(error));
 
-  //   return () => {
-  //     console.log("App is unmounting");
-  //   };
-  // }, []);
+    // return () => {
+    //   console.log("App is unmounting");
+    // };
+    setTranscript(
+      "Hello, I’m Eleanor. I’m here to create a safe space for you to reflect on what you’re experiencing. My goal is to help you explore your thoughts and feelings so you can find your own solutions. How are you feeling today? What’s been on your mind? \
+      Hello, I’m Eleanor. I’m here to create a safe space for you to reflect on what you’re experiencing. My goal is to help you explore your thoughts and feelings so you can find your own solutions. How are you feeling today? What’s been on your mind?"
+
+    );
+  }, []);
+
+  const alerter = (e) =>{
+    alert('hello');
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,37 +62,23 @@ function App() {
         </a>
         , was an early pioneer in offering Rogerian therapy in a digital format.
       </p>
-      {/* <form onSubmit={handleSubmit}> */}
+     
 
-      <div className="container">
-        <div className="column">
+      <form>
+        <div className="button-align">
           <textarea
-            placeholder="Column 1 Text Area"
-            id="prompt"
-            name="prompt"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            required
+            className="user-input"
+            id="submit"
+            type="text"
+            placeholder="What's on your mind?"
           ></textarea>
+          <input className="share-btn" type="button" onClick={alerter} value="Share"/>
         </div>
+      </form>
 
-        <button onClick={handleSubmit} className="submit-button">
-          Engage <span className="arrow">→</span>
-        </button>
-
-        <div className="column">
-          <textarea
-            readOnly
-            placeholder="Column 2 Text Area"
-            value={response}
-          ></textarea>
-        </div>
-      </div>
-      {/* </form> */}
-
-      <div className="column">
-        <p >Transcript</p>
-        <textarea className="transcript" readOnly defaultValue={transcript}></textarea>
+      <div className="transcript-column">
+        <p className="transcript-header">Transcript</p>
+        <div className="transcript">{transcript}</div>
       </div>
     </div>
   );

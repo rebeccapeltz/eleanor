@@ -1,0 +1,124 @@
+html {
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    font-size: large;
+    background-color: #282828;
+    color: #ffbf00;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  h1,
+  h2,
+  h4,
+  form {
+    text-align: center;
+  }
+  
+  input {
+    height: 30px;
+    margin: 0 10px;
+  }
+  
+  .description {
+    width: 70%;
+    margin: 0 auto;
+    font-weight: 550;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .transcript{
+    padding: 2rem;
+    border: thick double #ffbf00;
+    height: 100px;
+    overflow-y: scroll;
+  }
+  
+
+  .transcript-column{
+    margin: 2rem auto;
+    min-width: 300px; 
+    max-width: 60rem;
+  }
+
+  .transcript-header{
+    background-color: #ffbf00;
+    color: black;
+    font-weight: 700;
+    padding: 1rem 1rem;
+    margin:0;
+  }
+  
+  
+  textarea {
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+  }
+  
+  @media (max-width: 600px) {
+    .column {
+      flex: 100%; 
+    }
+  }
+  
+  
+  a:link {
+    font-weight: 800;
+    color: #ffbf00;
+    text-decoration: none;
+  }
+  
+  /* visited link */
+  a:visited {
+    font-weight: 800;
+    color: #ffbf00;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: hotpink;
+  }
+  
+  /* selected link */
+  a:active {
+    color: #ffbf00;
+    ;
+  }
+  
+  
+  .share-btn{
+      color: black;
+      font-family: 'Courier New', Courier, monospace;
+      font-size:large;
+      font-weight: 600;
+      border: none;
+      box-sizing: border-box;
+      padding: 0px 15px;
+      border-radius: 130px;
+      background: #ffbf00;
+      cursor: pointer;
+  }
+  
+  .user-input{
+    width: 53rem;
+    padding: 20px;
+    border-radius: 50px;
+    height: 3rem;
+  }
+  
+  .button-align{
+      display: flex;
+      justify-content:center; 
+      align-items: center;
+      margin: 1rem 0 2rem 0;
+  }
