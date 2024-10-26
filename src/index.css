@@ -1,0 +1,36 @@
+.inconsolata-100 {
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: auto;
+  font-weight:100;
+  font-style: normal;
+  font-variation-settings:"wdth" 100;
+}
+
+.inconsolata-500 {
+    font-family: "Inconsolata", monospace;
+    font-optical-sizing: auto;
+    font-weight:550;
+    font-style: normal;
+    font-variation-settings:"wdth" 550;
+  }
+  .inconsolata-600 {
+    font-family: "Inconsolata", monospace;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-style: normal;
+    font-variation-settings:"wdth" 600;
+  }
+  .inconsolata-700 {
+    font-family: "Inconsolata", monospace;
+    font-optical-sizing: auto;
+    font-weight:700;
+    font-style: normal;
+    font-variation-settings:"wdth" 700;
+  }
+  .inconsolata-800 {
+    font-family: "Inconsolata", monospace;
+    font-optical-sizing: auto;
+    font-weight:800;
+    font-style: normal;
+    font-variation-settings:"wdth" 800;
+  }
