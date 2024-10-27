@@ -1,6 +1,19 @@
+
+.admin {
+    color: lightgreen;
+    font-weight: 700;
+}
+
+.eleanor {
+    color: #ffb3de;
+    font-weight: 700;
+}
+.client{
+    color: #b3ebf2;
+    font-weight: 700;
+}
 .msg {
-    color: green;
-    font-weight: 600;
-    padding: 1rem;
-   
+    color: white;
+    font-weight:200;
+    padding-left:1rem;
 }

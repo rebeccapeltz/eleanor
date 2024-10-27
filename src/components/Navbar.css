@@ -2,17 +2,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: #F7D6D0;
     padding: 1rem;
   }
-  
-  .navbar-left .logo {
+
+  .navbar-left {
     font-size: 1.5rem;
     font-weight: 700;
     text-decoration: none;
   }
   
-  .navbar-center  {
+  .navbar-left {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+
     list-style-type: none;
     font-size: 2rem;
     font-weight: 700;
@@ -20,9 +24,20 @@
     margin: 0;
     padding: 0;
   }
+ 
+  
+  /* .navbar-center  {
+    list-style-type: none;
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  } */
 
   
   .navbar-right {
+    color: #281b0d;
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -30,22 +45,30 @@
   .navbar-right a{
     margin-left: 1rem;
   }
-  
-  /* .navbar-right .cart-icon,
-  .navbar-right .user-icon {
-    color: #fff;
+
+  a:link {
+    /* font-weight: 800; */
+    color: #281b0d;
     text-decoration: none;
-    margin-left: 1rem;
-    position: relative;
-  } */
+  }
   
-  /* .navbar-right .cart-count {
-    background-color: #f44336;
-    color: #fff;
-    border-radius: 50%;
-    padding: 0 0.5rem;
-    font-size: 0.8rem;
-    position: absolute;
-    top: -0.5rem;
-    right: -0.5rem;
-  } */
+  /* visited link */
+  a:visited {
+    /* font-weight: 800; */
+    color: #281b0d;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: hotpink;
+  }
+  
+  /* selected link */
+  .active span {
+    color: #281b0d;
+  }
+
+a span{
+  color: #996630;
+}
+ 

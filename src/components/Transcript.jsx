@@ -2,7 +2,7 @@ import MessageList from "./MessageList";
 function Transcript(messageItems) {
     // debugger
   return (
-    <div className="transcript">
+    <div id="transcript" className="transcript">
       {/* {transcript} */}
       <MessageList items={messageItems.items} />
     </div>

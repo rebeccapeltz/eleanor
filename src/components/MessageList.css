@@ -1,6 +1,8 @@
 .msg-list{
     padding: 1rem;
-    border: thick double #ffbf00;
-    height: 200px;
+    border: thick double #f7d6d0;
+    height: 20rem;
     overflow-y: scroll;
 }
+
+ul { list-style-type: none; }

@@ -4,22 +4,22 @@ function Message(item) {
   if (item.props.type == "admin") {
     return (
       <div>
-        <div className="msg">Admin</div>
-        <p style={{ color: "green" }}>{item.props.content}</p>
+        <div className="admin">Admin</div>
+        <p className="msg">{item.props.content}</p>
       </div>
     );
-  } else if (item.props.type == "question") {
+  } else if (item.props.type == "client") {
     return (
       <div>
-        <div className="msg">User</div>
-        <p style={{ color: "green" }}>{item.props.content}</p>
+        <div className="client">Client</div>
+        <p className="msg">{item.props.content}</p>
       </div>
     );
   } else if (item.props.type == "response") {
     return (
       <div>
-        <div className="msg">Eleanor</div>
-        <p style={{ color: "green" }}>{item.props.content}</p>
+        <div className="eleanor">Eleanor</div>
+        <p className="msg">{item.props.content}</p>
       </div>
     );
   }
