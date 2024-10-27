@@ -1,32 +1,21 @@
-import "./App.css";
-
+import "../index.css";
 import React, { useState, useEffect, useRef } from "react";
-// import Message from "./components/Message";
-// import MesssageList from "./components/MessageList";
-import Transcript from "./components/Transcript";
-import Navbar from './components/Navbar';
+import "./Session.css";
+import Border from "../components/Border.jsx";
 
+import Transcript from "../components/Transcript.jsx";
+import Navbar from "../components/Navbar.jsx";
 
-
-function App() {
+function Session() {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
-  // const [transcript, setTranscript] = useState("");
   const [messageItems, setMessageItems] = useState([]);
 
- 
-
   useEffect(() => {
-    // messageItems.push(new Message('admin','Welcome'));
     let adminItem = { type: "admin", content: "Welcome" };
-    // debugger
     setMessageItems((messageItems) => [...messageItems, adminItem]);
-
-    // messageItems.push(new Message('response'), 'Hello, I’m Eleanor.');
     let responseItem = { type: "response", content: "Hello, I’m Eleanor." };
-    // debugger
     setMessageItems((messageItems) => [...messageItems, responseItem]);
-
 
     // fetch("http://localhost:8888/.netlify/functions/hello")
     //   .then((response) => response.json())
@@ -64,21 +53,49 @@ function App() {
     // );
   }, []);
 
-  const alerter = (e) => {
-    alert("hello");
-  };
+  async function convertHTMLtoText(html) {
+    const response = await fetch(
+      "http://localhost:8888/.netlify/functions/convert",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          input: html,
+        }),
+      }
+    );
+    const data = await response.json();
+    let result = data.result;
+    return result;
+  }
+  async function download() {
+    var aLink = document.body.appendChild(document.createElement("a"));
+    aLink.download = "export.txt";
+    let html = document.getElementById("transcript").innerHTML;
+   
+
+    const text = await convertHTMLtoText(html);
+    let textFileAsBlob = new Blob([text], { type: "text/plain" });
+    if (window.webkitURL != null) {
+      aLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    } else {
+      aLink.href = window.URL.createObjectURL(textFileAsBlob);
+      aLink.style.display = "none";
+      document.body.appendChild(downloadLink);
+    }
+    aLink.click();
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // debugger
-    let questionItem = { type: "question", content: prompt };
+    let questionItem = { type: "client", content: prompt };
     setMessageItems((messageItems) => [...messageItems, questionItem]);
-    // setMessageItems(messageItems => messageItems.unshift(questionItem));
 
     // Perform your logic to generate the response based on the prompt
     const generatedResponse = "response"; //generateResponse(prompt); // Replace with your actual response generation logic
     setResponse(generatedResponse);
-    // messageItems.push(new Message('response',generatedResponse))
     let responseItem = { type: "response", content: generatedResponse };
     setMessageItems((messageItems) => [...messageItems, responseItem]);
 
@@ -87,42 +104,12 @@ function App() {
   };
 
   return (
-    <div className="App">
-    <Navbar />
-      {/* <h1>Eleanor</h1> */}
-      {/* <h2>Digital Rogerian Psychotherapy</h2> */}
-
-      <p className="description">
-        Rogerian Psychotherapy is a path towards self awareness. It is based on
-        the idea that people find their own solutions through self reflections.
-        Conversation focused on the reflection and problem resolution is helpful
-        for relieving stress.
-        <br />
-        <br />
-        My mother,{" "}
-        <a
-          href="https://en.wikipedia.org/wiki/ELIZA"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Eliza
-        </a>
-        , was an early pioneer in offering Rogerian therapy in a digital format.
-      </p>
-
-      <div className="transcript-column">
-        <p className="transcript-header">Transcript</p>
-        <Transcript items={messageItems}/>
-        {/* <div className="transcript">
-          {transcript}
-          <MesssageList items={messageItems} />
-        </div> */}
-
-      </div>
-     
+    <div>
+      <Border></Border>
+      <Navbar />
 
       <form>
-        <div className="button-align">
+        <div style={{ margin: "3rem 0" }} className="button-align">
           <textarea
             className="user-input"
             id="submit"
@@ -142,8 +129,24 @@ function App() {
         </div>
       </form>
 
+      <div className="transcript-column">
+        <div className="transcript-header">
+          <div>Transcript</div>
+          <div>
+            {" "}
+            <input
+              className="download-btn"
+              type="button"
+              onClick={download}
+              value="Download"
+            />
+          </div>
+        </div>
+        <Transcript items={messageItems} />
+      </div>
+
     </div>
   );
 }
 
-export default App;
+export default Session;

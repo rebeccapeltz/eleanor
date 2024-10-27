@@ -2,7 +2,7 @@ html {
     width: 100%;
     height: 100%;
     font-size: large;
-    background-color: #281b0d;   /*#282828; */
+    background-color: #5C4033;
     color: #281b0d;
     box-sizing: border-box;
     /* padding: 0.5rem; */
@@ -24,7 +24,6 @@ html {
     width: 70%;
     margin: 0 auto;
     font-weight: 550;
-    color: #F7D6D0;
   }
   
   main {
@@ -32,13 +31,6 @@ html {
     flex-direction: column;
   }
   
-  /* .transcript{
-    padding: 1rem;
-    border: thick double #ffbf00;
-    height: 200px;
-    overflow-y: scroll;
-  }
-   */
 
   .transcript-column{
     margin: 2rem auto;
@@ -47,7 +39,9 @@ html {
   }
 
   .transcript-header{
-    background-color: #ffbf00;
+    display: flex;
+    justify-content: space-between;
+    background-color: #f7d6d0;
     color: black;
     font-weight: 700;
     padding: .5rem .5rem;
@@ -72,11 +66,33 @@ html {
   }
   
   
+  a:link {
+    font-weight: 800;
+    color: #281b0d;
+    text-decoration: none;
+  }
   
-/*   
+  /* visited link */
+  a:visited {
+    font-weight: 800;
+    color: #281b0d;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: hotpink;
+  }
+  
+  /* selected link */
+  a:active {
+    color: green;
+    ;
+  }
+  
+  
   .share-btn{
       color: black;
-      font-family: spaceGrotesk, sans-serif;
+      font-family: SpaceGrotesk, sans-serif;
       font-size:large;
       font-weight: 600;
       border: none;
@@ -85,7 +101,20 @@ html {
       border-radius: 130px;
       background: #f7d6d0;
       cursor: pointer;
-  } */
+  }
+  .download-btn{
+    font-family: SpaceGrotesk, sans-serif;
+    font-size:large;
+    font-weight: 600;
+    border: none;
+    box-sizing: border-box;
+    padding: 0px 15px;
+    border-radius: 130px;
+    background: #f7d6d0;
+    color: black;
+    cursor: pointer;
+    border: 2px solid black;
+}
   
   .user-input{
     width: 53rem;

@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Border from "../components/Border.jsx";
 
 function About() {
   return (
     <div>
+      <Border></Border>
       <Navbar />
       <h1>About</h1>
       <p className="description">

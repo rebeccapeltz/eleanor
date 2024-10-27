@@ -15,8 +15,8 @@ function Navbar() {
         <div>Eleanor: Digital Rogerian Therapy</div>
       </div> */}
       <div className="navbar-right">
-      <NavLink to="/rules" className={({isActive }) => (isActive ? "active" : "")}>
-        <span className="spaceGrotesk200">Rules</span>
+      <NavLink to="/session" className={({isActive }) => (isActive ? "active" : "")}>
+        <span className="spaceGrotesk200">Session</span>
       </NavLink>
       <NavLink to="/about" className={({isActive }) => (isActive ? "active" : "")}>
         <span className="spaceGrotesk200">About</span>
