@@ -8,7 +8,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-left">
       <NavLink to="/" className={({isActive }) => (isActive ? "active" : "")}>
-        <span className="spaceGrotesk200">Eleanor: Digital Rogerian Therapy</span>
+        <span className="spaceGrotesk200">Home</span>
       </NavLink>
       </div>
       {/* <div className="navbar-center">

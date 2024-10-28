@@ -107,7 +107,7 @@ function Session() {
     <div>
       <Border></Border>
       <Navbar />
-
+   <section className="cui">
       <form>
         <div style={{ margin: "3rem 0" }} className="button-align">
           <textarea
@@ -144,6 +144,7 @@ function Session() {
         </div>
         <Transcript items={messageItems} />
       </div>
+      </section>
 
     </div>
   );

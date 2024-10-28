@@ -13,12 +13,12 @@
   }
   
   .navbar-left {
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     font-weight: 700;
     text-decoration: none;
 
     list-style-type: none;
-    font-size: 2rem;
+    font-size: 1.0rem;
     font-weight: 700;
     display: flex;
     margin: 0;
@@ -38,7 +38,7 @@
   
   .navbar-right {
     color: #281b0d;
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     display: flex;
     align-items: center;
   }
