@@ -2,59 +2,47 @@ import "../index.css";
 import React, { useState, useEffect, useRef } from "react";
 import "./Session.css";
 import Border from "../components/Border.jsx";
-
 import Transcript from "../components/Transcript.jsx";
 import Navbar from "../components/Navbar.jsx";
 
 function Session() {
+  const [loading, setLoading] = useState(false);
+
   const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("");
   const [messageItems, setMessageItems] = useState([]);
 
   useEffect(() => {
-    let adminItem = { type: "admin", content: "Welcome" };
-    setMessageItems((messageItems) => [...messageItems, adminItem]);
-    let responseItem = { type: "response", content: "Hello, I’m Eleanor." };
-    setMessageItems((messageItems) => [...messageItems, responseItem]);
+    setLoading(true)
+    setMessageItems([])
+    setPrompt("")
+  
+    const fetchData = async (path) => {
+     
+      const baseUrl =
+        process.env.VITE_PROD_ENV === "true"
+          ? process.env.VITE_PROD_BASE_API
+          : process.env.VITE_DEV_BASE_API;
+      const url = `${baseUrl}/${path}`;
+      const data = await fetch(url);
+      const json = await data.json();
 
-    // fetch("http://localhost:8888/.netlify/functions/hello")
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     debugger
-    //     let output = json.message;
-    //     let outputLessQuotes = output.substring(1, output.length-3);
-    //     setTranscript(outputLessQuotes);
-    //     setResponse(outputLessQuotes);
-    //   })
-    //   .catch((error) => console.error(error));
+      // create messages
+      let adminItem = { type: "admin", content: "Welcome" };
+      setMessageItems((messageItems) => [...messageItems, adminItem]);
 
-    // return () => {
-    //   console.log("App is unmounting");
-    // };
-    // setTranscript(
-    //   `
-    //  <div style="color:green">Admin</div>
-    //   <p>The rules are ...</p>
-    //   <span>Eleanor</span>
-    //   <p>Hello, I’m Eleanor. I’m here to create a safe space for you to reflect on what \
-    //   you’re experiencing. My goal is to help you explore your thoughts and feelings so \
-    //   you can find your own solutions. How are you feeling today? What’s been on your mind?\
-    //   </p>
+      let responseItem = { type: "response", content: json.message };
+      setMessageItems((messageItems) => [...messageItems, responseItem]);
+      // if (aiResponse.length > 0) setLoading(false);
+      setLoading(false)
+    };
 
-    //    <div style="color:green">Admin</div>
-    //   <p>The rules are ...</p>
-    //   <span>Eleanor</span>
-    //   <p>Hello, I’m Eleanor. I’m here to create a safe space for you to reflect on what \
-    //   you’re experiencing. My goal is to help you explore your thoughts and feelings so \
-    //   you can find your own solutions. How are you feeling today? What’s been on your mind?\
-    //   </p>
-
-    //   `
-    // );
+    fetchData('hello')
+    .catch(console.error)
+    
   }, []);
 
   async function convertHTMLtoText(html) {
-    const response = await fetch(
+    const resp = await fetch(
       "http://localhost:8888/.netlify/functions/convert",
       {
         method: "POST",
@@ -66,7 +54,7 @@ function Session() {
         }),
       }
     );
-    const data = await response.json();
+    const data = await resp.json();
     let result = data.result;
     return result;
   }
@@ -74,7 +62,6 @@ function Session() {
     var aLink = document.body.appendChild(document.createElement("a"));
     aLink.download = "export.txt";
     let html = document.getElementById("transcript").innerHTML;
-   
 
     const text = await convertHTMLtoText(html);
     let textFileAsBlob = new Blob([text], { type: "text/plain" });
@@ -88,64 +75,110 @@ function Session() {
     aLink.click();
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let questionItem = { type: "client", content: prompt };
-    setMessageItems((messageItems) => [...messageItems, questionItem]);
+  
+  const fetchResponseData = async (path,clientPrompt) => {
+     debugger
+    const baseUrl =
+      process.env.VITE_PROD_ENV === "true"
+        ? process.env.VITE_PROD_BASE_API
+        : process.env.VITE_DEV_BASE_API;
+    const url = `${baseUrl}/${path}`;
 
-    // Perform your logic to generate the response based on the prompt
-    const generatedResponse = "response"; //generateResponse(prompt); // Replace with your actual response generation logic
-    setResponse(generatedResponse);
-    let responseItem = { type: "response", content: generatedResponse };
+    const resp = await fetch(
+      url,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          input: clientPrompt,
+        }),
+      }
+    );
+    debugger
+    const data = await resp.json();
+    let result = data.message;
+
+    // let result = "test"
+    debugger
+    // create messages
+    let responseItem = { type: "response", content: result };
     setMessageItems((messageItems) => [...messageItems, responseItem]);
 
-    // setTranscript(transcript + "\n" + generatedResponse);
-    scrollToBottom();
+    // scrollToBottom();
+  };
+
+  const clearPrompt  = ()=>{
+    setPrompt("")
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setPrompt("")
+    let questionItem = { type: "client", content: prompt };
+    setMessageItems((messageItems) => [...messageItems, questionItem]);
+    debugger
+    fetchResponseData("processClient", prompt);
+    debugger
+   
+
+    
+
+
+    // Perform your logic to generate the response based on the prompt
+    // const generatedResponse = "response"; //generateResponse(prompt); // Replace with your actual response generation logic
+    // let responseItem = { type: "response", content: generatedResponse };
+    // setMessageItems((messageItems) => [...messageItems, responseItem]);
+    // scrollToBottom();
   };
 
   return (
     <div>
       <Border></Border>
       <Navbar />
-   <section className="cui">
-      <form>
-        <div style={{ margin: "3rem 0" }} className="button-align">
-          <textarea
-            className="user-input"
-            id="submit"
-            type="text"
-            placeholder="What's on your mind?"
-            value={prompt}
-            onChange={(e) => {
-              setPrompt(e.target.value);
-            }}
-          ></textarea>
-          <input
-            className="share-btn"
-            type="button"
-            onClick={handleSubmit}
-            value="Share"
-          />
-        </div>
-      </form>
-
-      <div className="transcript-column">
-        <div className="transcript-header">
-          <div>Transcript</div>
-          <div>
-            {" "}
+      <section className="cui">
+        <form>
+          <div style={{ margin: "3rem 0" }} className="button-align">
+            <textarea
+              className="user-input"
+              id="submit"
+              type="text"
+              value={prompt}
+              placeholder="What's on your mind?"
+              onChange={(e) => {
+                setPrompt(e.target.value);
+              }}
+            ></textarea>
             <input
-              className="download-btn"
+              className="share-btn"
               type="button"
-              onClick={download}
-              value="Download"
+              onClick={handleSubmit}
+              value="Share"
             />
           </div>
-        </div>
-        <Transcript items={messageItems} />
-      </div>
-      </section>
+        </form>
 
+        <div className="transcript-column">
+          <div className="transcript-header">
+            <div>Transcript</div>
+            <div>
+              {" "}
+              <input
+                className="download-btn"
+                type="button"
+                onClick={download}
+                value="Download"
+              />
+            </div>
+          </div>
+          {loading == true ? (
+            <p style={{ margin: "30px 0" }}>Loading ...</p>
+          ) : (
+            <Transcript items={messageItems} />
+          )}
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,5 +1,8 @@
 # React + Vite
 
+netlify DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+https://github.com/netlify/cli/issues/6836
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
