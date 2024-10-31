@@ -34,7 +34,6 @@ html {
 
   .transcript-column{
     margin: 2rem auto;
-    min-width: 300px; 
     max-width: 60rem;
   }
 

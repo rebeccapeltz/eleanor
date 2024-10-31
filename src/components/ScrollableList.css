@@ -1,0 +1,17 @@
+.bannedlist-column{
+    margin: 2rem auto;
+    width: 12rem;
+  }
+.bannedlist-header{
+    text-align: center;
+    width: 12rem;
+    background-color: #F7D6D0;
+    margin:0;
+}
+.bannedlist{
+    width: 12rem;
+    height: 7rem;
+    overflow: "auto";
+    resize: "none";
+    background-color: hotpink;
+}

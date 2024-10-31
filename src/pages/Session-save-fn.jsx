@@ -31,7 +31,7 @@ function Session() {
         // Handle error, e.g., display an error message to the user
       }
     };
-    debugger;
+    // debugger;
     fetchDataFromHelloApi();
     // let adminItem = { type: "admin", content: "Welcome" };
     // setMessageItems((messageItems) => [...messageItems, adminItem]);

@@ -4,6 +4,8 @@ import "./Session.css";
 import Border from "../components/Border.jsx";
 import Transcript from "../components/Transcript.jsx";
 import Navbar from "../components/Navbar.jsx";
+import {filterBannedWords} from "../functions/utils.js";
+const testMode = process.env.VITE_TEST_MODE;
 
 function Session() {
   const [loading, setLoading] = useState(false);
@@ -12,19 +14,24 @@ function Session() {
   const [messageItems, setMessageItems] = useState([]);
 
   useEffect(() => {
-    setLoading(true)
-    setMessageItems([])
-    setPrompt("")
-  
+    setLoading(true);
+    setMessageItems([]);
+    setPrompt("");
+
     const fetchData = async (path) => {
-     
       const baseUrl =
         process.env.VITE_PROD_ENV === "true"
           ? process.env.VITE_PROD_BASE_API
           : process.env.VITE_DEV_BASE_API;
       const url = `${baseUrl}/${path}`;
-      const data = await fetch(url);
-      const json = await data.json();
+      let json = {};
+      if (testMode) {
+        json = {"message": "test mode"}
+      } else{
+        const data = await fetch(url);
+        json = await data.json();
+      }
+
 
       // create messages
       let adminItem = { type: "admin", content: "Welcome" };
@@ -33,12 +40,10 @@ function Session() {
       let responseItem = { type: "response", content: json.message };
       setMessageItems((messageItems) => [...messageItems, responseItem]);
       // if (aiResponse.length > 0) setLoading(false);
-      setLoading(false)
+      setLoading(false);
     };
 
-    fetchData('hello')
-    .catch(console.error)
-    
+    fetchData("hello").catch(console.error);
   }, []);
 
   async function convertHTMLtoText(html) {
@@ -75,33 +80,29 @@ function Session() {
     aLink.click();
   }
 
-  
-  const fetchResponseData = async (path,clientPrompt) => {
-     debugger
+  const fetchResponseData = async (path, clientPrompt) => {
+    // debugger;
     const baseUrl =
       process.env.VITE_PROD_ENV === "true"
         ? process.env.VITE_PROD_BASE_API
         : process.env.VITE_DEV_BASE_API;
     const url = `${baseUrl}/${path}`;
 
-    const resp = await fetch(
-      url,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          input: clientPrompt,
-        }),
-      }
-    );
-    debugger
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        input: clientPrompt,
+      }),
+    });
+    // debugger;
     const data = await resp.json();
     let result = data.message;
 
     // let result = "test"
-    debugger
+    // debugger;
     // create messages
     let responseItem = { type: "response", content: result };
     setMessageItems((messageItems) => [...messageItems, responseItem]);
@@ -109,28 +110,31 @@ function Session() {
     // scrollToBottom();
   };
 
-  const clearPrompt  = ()=>{
-    setPrompt("")
-  }
+  const clearPrompt = () => {
+    setPrompt("");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPrompt("")
-    let questionItem = { type: "client", content: prompt };
-    setMessageItems((messageItems) => [...messageItems, questionItem]);
-    debugger
-    fetchResponseData("processClient", prompt);
-    debugger
-   
+    // check for banned words
 
-    
+    const bannedWords = filterBannedWords(prompt);
+    if (bannedWords.length > 0) {
+      //output admin warning about words to transcript
+      let questionItem = { type: "admin", content: `We can not process and discuss input containing
+        banned words: ${bannedWords.join(', ')}` };
+      setMessageItems((messageItems) => [...messageItems, questionItem]);
+    } else {
+      // ok to process prompt
+      // output client to transcript
+      let questionItem = { type: "client", content: prompt };
+      setMessageItems((messageItems) => [...messageItems, questionItem]);
 
-
-    // Perform your logic to generate the response based on the prompt
-    // const generatedResponse = "response"; //generateResponse(prompt); // Replace with your actual response generation logic
-    // let responseItem = { type: "response", content: generatedResponse };
-    // setMessageItems((messageItems) => [...messageItems, responseItem]);
-    // scrollToBottom();
+      fetchResponseData("processClient", prompt);
+      // debugger;
+      // clear user input
+      setPrompt("");
+    }
   };
 
   return (
