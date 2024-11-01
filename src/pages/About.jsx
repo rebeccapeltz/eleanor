@@ -1,3 +1,4 @@
+import "./About.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -9,6 +10,7 @@ function About() {
       <Border></Border>
       <Navbar />
       <h1>About</h1>
+   
       <p className="description">
         Rogerian Psychotherapy is a path towards self awareness. It is based on
         the idea that people find their own solutions through self reflections.
