@@ -1,14 +1,8 @@
 // https://weam.ai/blog/imageprompt/list-of-banned-words-in-midjourney/
 export const BannedWords = {
-  blood: true,
   bloodbath: true,
-  bloody: true,
-  flesh: true,
   corpse: true,
-  crucified: true,
-  cutting: true,
   decapitate: true,
-  infested: true,
   gruesome: true,
   kill: true,
   sadist: true,

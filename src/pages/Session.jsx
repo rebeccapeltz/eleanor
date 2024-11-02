@@ -4,7 +4,7 @@ import "./Session.css";
 import Border from "../components/Border.jsx";
 import Transcript from "../components/Transcript.jsx";
 import Navbar from "../components/Navbar.jsx";
-import {filterBannedWords} from "../functions/utils.js";
+import { filterBannedWords } from "../functions/utils.js";
 const testMode = process.env.VITE_TEST_MODE;
 
 function Session() {
@@ -18,20 +18,19 @@ function Session() {
     setMessageItems([]);
     setPrompt("");
 
-    const fetchData = async (path) => {
+    const fetchDataHello = async (path) => {
       const baseUrl =
         process.env.VITE_PROD_ENV === "true"
           ? process.env.VITE_PROD_BASE_API
           : process.env.VITE_DEV_BASE_API;
       const url = `${baseUrl}/${path}`;
       let json = {};
-      if (testMode) {
-        json = {"message": "test mode"}
-      } else{
+      if (testMode === "true") {
+        json = { message: "Eleanor test mode" };
+      } else {
         const data = await fetch(url);
         json = await data.json();
       }
-
 
       // create messages
       let adminItem = { type: "admin", content: "Welcome" };
@@ -39,11 +38,10 @@ function Session() {
 
       let responseItem = { type: "response", content: json.message };
       setMessageItems((messageItems) => [...messageItems, responseItem]);
-      // if (aiResponse.length > 0) setLoading(false);
       setLoading(false);
     };
 
-    fetchData("hello").catch(console.error);
+    fetchDataHello("hello").catch(console.error);
   }, []);
 
   async function convertHTMLtoText(html) {
@@ -88,26 +86,24 @@ function Session() {
         : process.env.VITE_DEV_BASE_API;
     const url = `${baseUrl}/${path}`;
 
-    const resp = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        input: clientPrompt,
-      }),
-    });
-    // debugger;
-    const data = await resp.json();
-    let result = data.message;
-
-    // let result = "test"
-    // debugger;
-    // create messages
-    let responseItem = { type: "response", content: result };
-    setMessageItems((messageItems) => [...messageItems, responseItem]);
-
-    // scrollToBottom();
+    if (testMode === "true") {
+      let responseItem = { type: "response", content: "Response test mode" };
+      setMessageItems((messageItems) => [...messageItems, responseItem]);
+    } else {
+      const resp = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          input: clientPrompt,
+        }),
+      });
+      const data = await resp.json();
+      let result = data.message;
+      let responseItem = { type: "response", content: result };
+      setMessageItems((messageItems) => [...messageItems, responseItem]);
+    }
   };
 
   const clearPrompt = () => {
@@ -121,18 +117,20 @@ function Session() {
     const bannedWords = filterBannedWords(prompt);
     if (bannedWords.length > 0) {
       //output admin warning about words to transcript
-      let questionItem = { type: "admin", content: `We can not process and discuss input containing
-        banned words: ${bannedWords.join(', ')}` };
+      let questionItem = {
+        type: "admin",
+        content: `We can not process and discuss input containing
+        banned words: ${bannedWords.join(", ")}. See list of banned words 
+        on home page.`,
+      };
       setMessageItems((messageItems) => [...messageItems, questionItem]);
     } else {
       // ok to process prompt
-      // output client to transcript
+      // output to transcript
       let questionItem = { type: "client", content: prompt };
       setMessageItems((messageItems) => [...messageItems, questionItem]);
 
       fetchResponseData("processClient", prompt);
-      // debugger;
-      // clear user input
       setPrompt("");
     }
   };
