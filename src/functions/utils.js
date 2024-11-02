@@ -1,5 +1,12 @@
 // https://weam.ai/blog/imageprompt/list-of-banned-words-in-midjourney/
 export const BannedWords = {
+  shit: true,
+  piss: true,
+  fuck: true,
+  cunt: true,
+  cocksucker: true,
+  motherfucker: true,
+  tits: true,
   bloodbath: true,
   corpse: true,
   decapitate: true,
@@ -14,7 +21,6 @@ export const BannedWords = {
   suicide: true,
   bimbo: true,
   dominatrix: true,
-  fuck: true,
   shag: true,
   horny: true,
   incest: true,
@@ -31,8 +37,7 @@ export function filterBannedWords(prompt) {
     }
   }
   return notAllowedWords;
-};
-
+}
 
 //test
 // let test = filterbannedWords("suicide incest");

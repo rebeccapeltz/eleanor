@@ -18,3 +18,7 @@
     padding-left:1rem;
     margin: .5rem;
 }
+.admin-banned {
+    color: #FFA500;
+    font-weight: 400;
+}

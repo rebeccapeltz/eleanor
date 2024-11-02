@@ -6,6 +6,10 @@ import Transcript from "../components/Transcript.jsx";
 import Navbar from "../components/Navbar.jsx";
 import { filterBannedWords } from "../functions/utils.js";
 const testMode = process.env.VITE_TEST_MODE;
+const createMessageItem = (type, content, bannedWords) => {
+  return {"type": type, "content": content, "bannedWords":bannedWords}
+}
+  
 
 function Session() {
   const [loading, setLoading] = useState(false);
@@ -33,7 +37,8 @@ function Session() {
       }
 
       // create messages
-      let adminItem = { type: "admin", content: "Welcome" };
+      let adminItem = createMessageItem( "admin", "Welcome","" );
+      // adminItem is a data object
       setMessageItems((messageItems) => [...messageItems, adminItem]);
 
       let responseItem = { type: "response", content: json.message };
@@ -87,7 +92,7 @@ function Session() {
     const url = `${baseUrl}/${path}`;
 
     if (testMode === "true") {
-      let responseItem = { type: "response", content: "Response test mode" };
+      let responseItem = createMessageItem("response","Response test mode","");
       setMessageItems((messageItems) => [...messageItems, responseItem]);
     } else {
       const resp = await fetch(url, {
@@ -101,13 +106,9 @@ function Session() {
       });
       const data = await resp.json();
       let result = data.message;
-      let responseItem = { type: "response", content: result };
+      let responseItem = createMessageItem("response", result,"");
       setMessageItems((messageItems) => [...messageItems, responseItem]);
     }
-  };
-
-  const clearPrompt = () => {
-    setPrompt("");
   };
 
   const handleSubmit = (e) => {
@@ -117,17 +118,19 @@ function Session() {
     const bannedWords = filterBannedWords(prompt);
     if (bannedWords.length > 0) {
       //output admin warning about words to transcript
-      let questionItem = {
-        type: "admin",
-        content: `We can not process and discuss input containing
-        banned words: ${bannedWords.join(", ")}. See list of banned words 
-        on home page.`,
-      };
+      // let questionItem = {
+      //   type: "admin",
+      //   content: `We can not process and discuss input containing
+      //   banned words: ${bannedWords.join(", ")}. See list of banned words 
+      //   on home page.`,
+      // };
+      let questionItem =createMessageItem("admin","We can not process and discuss input \
+        containing: BANNEDWORDS. See list of banned words on home page.",bannedWords.join(", "))
       setMessageItems((messageItems) => [...messageItems, questionItem]);
     } else {
       // ok to process prompt
       // output to transcript
-      let questionItem = { type: "client", content: prompt };
+      let questionItem = createMessageItem("client",prompt,"");
       setMessageItems((messageItems) => [...messageItems, questionItem]);
 
       fetchResponseData("processClient", prompt);
