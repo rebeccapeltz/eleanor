@@ -1,8 +1,7 @@
-// netlify/functions/processClient.js
 exports.handler = async (request, context) => {
   const headers = {
-    "Access-Control-Allow-Origin": "*", // Allow requests from any origin
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE", // Allow specific HTTP methods
+    "Access-Control-Allow-Origin": "*", 
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE", 
     "Access-Control-Allow-Headers": "Content-Type, Authorization", // Allow specific headers
   };
   key = process.env.GEN_AI_KEY;

@@ -5,9 +5,9 @@ const { convert } = require("html-to-text");
 
 exports.handler = async (request, context) => {
   const headers = {
-    "Access-Control-Allow-Origin": "*", // Allow requests from any origin
-    "Access-Control-Allow-Methods": "POST", // Allow specific HTTP methods
-    "Access-Control-Allow-Headers": "Content-Type, Authorization", // Allow specific headers
+    "Access-Control-Allow-Origin": "*", 
+    "Access-Control-Allow-Methods": "POST", 
+    "Access-Control-Allow-Headers": "Content-Type, Authorization", 
   };
 
   const data = JSON.parse(request.body);

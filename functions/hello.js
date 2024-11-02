@@ -1,9 +1,8 @@
-// netlify/functions/hello-world.js
 exports.handler = async (event, context) => {
   const headers = {
-    "Access-Control-Allow-Origin": "*", // Allow requests from any origin
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE", // Allow specific HTTP methods
-    "Access-Control-Allow-Headers": "Content-Type, Authorization", // Allow specific headers
+    "Access-Control-Allow-Origin": "*", 
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE", 
+    "Access-Control-Allow-Headers": "Content-Type, Authorization", 
   };
   key = process.env.GEN_AI_KEY;
   const introductionPrompt =
@@ -20,7 +19,6 @@ exports.handler = async (event, context) => {
     headers,
     body: JSON.stringify({
       message: result.response.text(),
-      // message: 'hello'
     }),
   };
 };
