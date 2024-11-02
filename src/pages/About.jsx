@@ -86,41 +86,83 @@ function About() {
             </figure>
           </div>
         </p>
+      </div>
 
-        <div className="intro">
-          <h2>From Eliza to Eleanor</h2>
-          <p>
-            Joseph Weizenbaum created the first chatbot in 1966. He named it
-            Eliza after the character Eliza in{" "}
-            <a
-              href="https://en.wikipedia.org/wiki/Pygmalion_(play)"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Pygmallian
-            </a>
-            . Eliza uses language to improve her social standing in George
-            Bernard Shaw's play.
-          </p>
-          <p>
-            The Eliza bot was modeled after Rogerian therapy, where the therapist
-            often restates the patient's own words. This worked well for Eliza
-            because the techology used pattern matching in creating a response for 
-            the patient to provide an illusion of understanding.
-          </p>
-          <p>
-            Once I understood the nature of what we now know as AI, I was interested 
-            in creating a more sophisticated version of Eliza, and in this application 
-            I'm calling her Eleanor.  There is no "Dr. Otto Mattic" necessary to front 
-            for this female digital therapist.
-          </p>
-          <p>Due to the problems that can arise in an online chat whether its with bot 
-            or in Social Media, I decided to create an Admin character who is responsible 
-            for checking for banned words that could lead to a problematic discussion. I used
-            some of the words I found in a list of banned words from a blog 
-            about <a href="https://weam.ai/blog/imageprompt/list-of-banned-words-in-midjourney/" 
-             target="_blank" >Midjourney's banned words</a>. 
-          </p>
+      <div className="intro">
+        <h2>From Eliza to Eleanor</h2>
+        <p>
+          Joseph Weizenbaum created the first chatbot in 1966. He named it Eliza
+          after the character Eliza in{" "}
+          <a
+            href="https://en.wikipedia.org/wiki/Pygmalion_(play)"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Pygmallian
+          </a>
+          . Eliza uses language to improve her social standing in George Bernard
+          Shaw's play.
+        </p>
+        <p>
+          The Eliza bot was modeled after Rogerian therapy, where the therapist
+          often restates the patient's own words. This worked well for Eliza
+          because the techology used pattern matching in creating a response for
+          the patient to provide an illusion of understanding.
+        </p>
+        <p>
+          Once I understood the nature of what we now know as AI, I was
+          interested in creating a more sophisticated version of Eliza, and in
+          this application I'm calling her Eleanor. There is no "Dr. Otto
+          Mattic" necessary to front for this female digital therapist.
+        </p>
+        <p>
+          Due to the problems that can arise in an online chat whether its with
+          bot or in Social Media, I decided to create an Admin character who is
+          responsible for checking for banned words that could lead to a
+          problematic discussion. I used some of the words I found in a list of
+          banned words from a blog about{" "}
+          <a
+            href="https://weam.ai/blog/imageprompt/list-of-banned-words-in-midjourney/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Midjourney's banned words
+          </a>{" "}
+          and, of course,
+          <a
+            href="https://en.wikipedia.org/wiki/Seven_dirty_words"
+            target="_blank"
+            rel="noreferrer"
+          >
+            George Carlin's 7 words you can neve say on TV
+          </a>
+          .
+        </p>
+      </div>
+      <div className="intro">
+        <h2>Digital Conversation</h2>
+        <p>
+          The Session page provides a user interface for creating and saving a
+          conversation. The art of Programming a Conversation User Interface
+          (CUI) has been developing for over a decade. It is available in the
+          form of voice as well as visual bots. In this application,
+          conversation is made available via a transcript. The Client input is
+          expandable. The image below shows the entired Gettyburg Address in the
+          input. To expand the viewable input, drag the little triangle in the
+          bottom right corner. the image below shows the basic client
+          functionality.
+        </p>
+        <div style={{ textAlign: "center", padding: "1rem" }}>
+          <figure>
+            <Zoom>
+              <img
+                width="80%"
+                src="./client-functionality.png"
+                alt="client functionality"
+              />
+              <figcaption>Client conversation functionality</figcaption>
+            </Zoom>
+          </figure>
         </div>
       </div>
     </div>

@@ -1,15 +1,13 @@
 .intro {
     background-color: white;
-    padding: 1rem 2rem;
     width: 70%;
-    margin: 2rem auto;
     font-weight: 550;
     color: black;
 }
 
 .description {
     width: 70%;
-    margin: 1rem auto;
+    margin: 0 auto;
     font-weight: 550;
     color: black;
   }

@@ -40,11 +40,6 @@ function Rules() {
 
           <div
             class="card"
-            style={{
-              dislay: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
           >
             <div class="card-container">
               <h2>
