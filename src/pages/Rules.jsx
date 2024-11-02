@@ -17,7 +17,10 @@ function Rules() {
         <h1>Digital Rogerian Therapy with Eleanor</h1>
         <p>
           Welcome to Eleanor’s waiting room. You can enter a Session with
-          Eleanor anytime by clicking the <span className="bold"><a href="./session">Session</a></span>{" "}
+          Eleanor anytime by clicking the{" "}
+          <span className="bold">
+            <a href="./session">Session</a>
+          </span>{" "}
           link in the navigation bar. When you converse with Eleanor, you will
           be referred to as the Client.
         </p>
@@ -35,7 +38,14 @@ function Rules() {
             />
           </div>
 
-          <div class="card">
+          <div
+            class="card"
+            style={{
+              dislay: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <div class="card-container">
               <h2>
                 <b>Eleanor</b>

@@ -4,12 +4,6 @@
     padding: 1rem 2rem;
 }
 
-@media (max-width: 1250px) {
-    .intro{
-        margin: 1.5rem;
-        padding: 1rem 1rem;
-    }
-  }
 
 
 h1,h2 {
@@ -31,13 +25,13 @@ h1,h2 {
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 25rem;
-    padding: 2rem;
+    padding: 1rem;
   }
 
   .card-img {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 25rem;
-    padding: 2rem;
+    padding: 1rem;
     text-align: center;
   }
 
@@ -53,9 +47,23 @@ h1,h2 {
     width: 25rem;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 1250px) {
+    .intro{
+        margin: 0 1.5rem;
+        padding: 1rem 1rem;
+    }
+  }
+
+
+  @media (max-width: 400px) {
     .card {
         padding: 0px;
+    }
+    .fit-picture {
+      max-width: 250px;
+    }
+    .intro {
+      margin: 0 1rem;
     }
   }
 

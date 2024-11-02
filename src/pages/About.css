@@ -1,0 +1,26 @@
+.intro {
+    background-color: white;
+    /* margin: 0 7rem; */
+    padding: 1rem 2rem;
+    width: 70%;
+    margin: 2rem auto;
+    font-weight: 550;
+    color: black;
+}
+
+.description {
+    width: 70%;
+    margin: 1rem auto;
+    font-weight: 550;
+    color: black;
+  }
+
+figcaption {
+    font-weight: 300;
+    font-size: medium;
+    font-style: italic;
+}
+
+h2 {
+    text-align: center;
+}
