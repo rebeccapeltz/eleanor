@@ -75,9 +75,9 @@ function Rules() {
               </p>
 
               <p>
-                Eleanor responds to client prompts using Google's
-                gemini-1.5-flash model. Learn more about Google Gemini by
-                reading the{" "}
+                Eleanor responds to client prompts using Google's 
+                <a href="https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/gemini-1.5-flash" target="_blank" rel="noreferer"> gemini-1.5-flash</a> model.
+                 Learn more about Google Gemini by reading the{" "}
                 <a
                   href="https://gemini.google.com/faq"
                   target="_blank"

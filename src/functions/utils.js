@@ -1,12 +1,5 @@
 // https://weam.ai/blog/imageprompt/list-of-banned-words-in-midjourney/
 export const BannedWords = {
-  shit: true,
-  piss: true,
-  fuck: true,
-  cunt: true,
-  cocksucker: true,
-  motherfucker: true,
-  tits: true,
   bloodbath: true,
   corpse: true,
   decapitate: true,
@@ -26,6 +19,13 @@ export const BannedWords = {
   incest: true,
   "jerk off": true,
   bondage: true,
+  shit: true,
+  piss: true,
+  fuck: true,
+  cunt: true,
+  cocksucker: true,
+  motherfucker: true,
+  tits: true
 };
 
 export function filterBannedWords(prompt) {
