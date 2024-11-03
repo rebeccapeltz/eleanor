@@ -1,7 +1,9 @@
 import "./Message.css";
+import Markdown from "markdown-to-jsx";
+
 function Message(item) {
-  // Exect 1 of 3 types: admin, client, response
-  debugger;
+  // Expect 1 of 3 types: admin, client, response
+
   if (item.props.type == "admin") {
     if (item.props.bannedWords.length > 0) {
       const str1 = "We can not process and discuss input \
@@ -21,7 +23,7 @@ function Message(item) {
       return (
         <div>
           <div className="admin">Admin</div>
-          <p className="msg">{item.props.content}</p>
+          <p className="msg"><Markdown>{item.props.content}</Markdown></p>
         </div>
       );
     }
@@ -29,14 +31,14 @@ function Message(item) {
     return (
       <div>
         <div className="client">Client</div>
-        <p className="msg">{item.props.content}</p>
+        <p className="msg"><Markdown options={{ wrapper: 'article' }}>{item.props.content}</Markdown></p>
       </div>
     );
   } else if (item.props.type == "response") {
     return (
       <div>
         <div className="eleanor">Eleanor</div>
-        <p className="msg">{item.props.content}</p>
+        <p className="msg"><Markdown options={{ wrapper: 'article' }}>{item.props.content}</Markdown></p>
       </div>
     );
   }

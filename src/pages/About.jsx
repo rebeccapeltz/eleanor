@@ -23,8 +23,8 @@ function About() {
           >
             Rebecca Peltz
           </a>
-          . I've been working with data and developing software since 1981. In
-          the late 1960s, When I was 11 years old my Dad, who was working as a
+          . I've been working with data and developing software since 1981. When
+          I was 11 years old, in the late 1960s, my Dad, who was working as a
           programmer for the Rand Corporation in California, took me to work.
         </p>
         <p className="description">
@@ -43,12 +43,13 @@ function About() {
         </div>
 
         <p className="description">
-          The game was named Eliza and he told me it was a psychiatrist who I
-          could talk to. He said it would listen to what I said and then often
-          repeat it back to me in a question. I didn't actually "talk" to Eliza.
-          Instead I typed what I had to say on a teletype. The psychiatrist
-          responded on the teletype. This provided a transcript of our
+          The game was named Eliza, and he told me it was a psychiatrist I could
+          talk to. He said it would listen to what I said and then often repeat
+          it back to me in a question. I didn't actually "talk" to Eliza.
+          Instead, I typed what I had to say on a teletype. The psychiatrist
+          responded on the teletype, which provided a transcript of our
           conversation.
+          </p>
           <div style={{ textAlign: "center", padding: "1rem" }}>
             <figure>
               <Zoom>
@@ -65,14 +66,14 @@ function About() {
               </Zoom>
             </figure>
           </div>
-        </p>
+        
 
         <p className="description">
           The image below shows the transcript of my conversation with Dr. Otto
           Matic, as the psychiatrist called himself. I wasn't too impressed with
-          our conversation. I was impressed by the fact that what I said
-          prompted a response indicating that there was some understanding on
-          the other end.
+          our conversation, but I was impressed by the fact that what I said
+          prompted a response indicating some understanding on the other end.
+          </p>
           <div style={{ textAlign: "center", padding: "1rem" }}>
             <figure>
               <Zoom>
@@ -85,7 +86,7 @@ function About() {
               </Zoom>
             </figure>
           </div>
-        </p>
+        
       </div>
 
       <div className="intro">
@@ -98,25 +99,25 @@ function About() {
             target="_blank"
             rel="noreferrer"
           >
-            Pygmallian
+            Pygmalion
           </a>
           . Eliza uses language to improve her social standing in George Bernard
           Shaw's play.
         </p>
         <p>
-          The Eliza bot was modeled after Rogerian therapy, where the therapist
-          often restates the patient's own words. This worked well for Eliza
-          because the techology used pattern matching in creating a response for
-          the patient to provide an illusion of understanding.
+          The Eliza bot was modeled after Rogerian therapy, in which the
+          therapist often restates the patient's own words. This worked well for
+          Eliza because the technology used pattern matching to create a
+          response for the patient, providing an illusion of understanding.
         </p>
         <p>
           Once I understood the nature of what we now know as AI, I was
-          interested in creating a more sophisticated version of Eliza, and in
-          this application I'm calling her Eleanor. There is no "Dr. Otto
-          Mattic" necessary to front for this female digital therapist.
+          interested in creating a more sophisticated version of Eliza, and I'm
+          calling her Eleanor in this application. There is no "Dr. Otto Mattic"
+          necessary to front for this female digital therapist.
         </p>
         <p>
-          Due to the problems that can arise in an online chat whether its with
+          Due to the problems that can arise in an online chat, whether with a
           bot or in Social Media, I decided to create an Admin character who is
           responsible for checking for banned words that could lead to a
           problematic discussion. I used some of the words I found in a list of
@@ -143,14 +144,13 @@ function About() {
         <h2>Digital Conversation</h2>
         <p>
           The Session page provides a user interface for creating and saving a
-          conversation. The art of Programming a Conversation User Interface
+          conversation. The art of programming a Conversation User Interface
           (CUI) has been developing for over a decade. It is available in the
-          form of voice as well as visual bots. In this application,
-          conversation is made available via a transcript. The Client input is
-          expandable. The image below shows the entired Gettyburg Address in the
-          input. To expand the viewable input, drag the little triangle in the
-          bottom right corner. the image below shows the basic client
-          functionality.
+          form of voice and visual bots. In this application, the conversation
+          is made available via a transcript. The Client input is expandable.
+          The image below shows the entire Gettysburg Address in the input. Drag
+          the little triangle in the bottom right corner to expand the viewable
+          input. The image below shows the basic client functionality.
         </p>
         <div style={{ textAlign: "center", padding: "1rem" }}>
           <figure>

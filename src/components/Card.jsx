@@ -3,15 +3,7 @@ import './Card.css';
 
 function Card({title, text}) {
   return (
-    // <div className="card">
-    //   <div className="card-header">{props.title}</div>
-    //   <div className="card-body">
-    //     <h2>{title}</h2>
-    //     <p>{text}</p>
-    //   </div>
-    // </div>
-    // <img src="img_avatar.png" alt="Avatar" style="width:100%">
-    <div class="container">
+    <div className="container">
       <h4><b>{title}</b></h4> 
       <p>{text}</p> 
     </div>

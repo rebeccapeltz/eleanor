@@ -1,15 +1,22 @@
 import "../index.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Session.css";
 import Border from "../components/Border.jsx";
 import Transcript from "../components/Transcript.jsx";
 import Navbar from "../components/Navbar.jsx";
 import { filterBannedWords } from "../functions/utils.js";
+import ClipLoader from "react-spinners/ClipLoader";
+
 const testMode = process.env.VITE_TEST_MODE;
 const createMessageItem = (type, content, bannedWords) => {
-  return {"type": type, "content": content, "bannedWords":bannedWords}
-}
-  
+  return { type: type, content: content, bannedWords: bannedWords };
+};
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 function Session() {
   const [loading, setLoading] = useState(false);
@@ -23,6 +30,7 @@ function Session() {
     setPrompt("");
 
     const fetchDataHello = async (path) => {
+      setLoading(true);
       const baseUrl =
         process.env.VITE_PROD_ENV === "true"
           ? process.env.VITE_PROD_BASE_API
@@ -37,7 +45,7 @@ function Session() {
       }
 
       // create messages
-      let adminItem = createMessageItem( "admin", "Welcome","" );
+      let adminItem = createMessageItem("admin", "Welcome", "");
       // adminItem is a data object
       setMessageItems((messageItems) => [...messageItems, adminItem]);
 
@@ -45,23 +53,25 @@ function Session() {
       setMessageItems((messageItems) => [...messageItems, responseItem]);
       setLoading(false);
     };
-
     fetchDataHello("hello").catch(console.error);
   }, []);
 
   async function convertHTMLtoText(html) {
-    const resp = await fetch(
-      "http://localhost:8888/.netlify/functions/convert",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          input: html,
-        }),
-      }
-    );
+    const baseUrl =
+      process.env.VITE_PROD_ENV === "true"
+        ? process.env.VITE_PROD_BASE_API
+        : process.env.VITE_DEV_BASE_API;
+    const url = `${baseUrl}/${path}`;
+
+    const resp = await fetch(`{baseUrl}/.netlify/functions/convert`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        input: html,
+      }),
+    });
     const data = await resp.json();
     let result = data.result;
     return result;
@@ -84,7 +94,7 @@ function Session() {
   }
 
   const fetchResponseData = async (path, clientPrompt) => {
-    // debugger;
+    setLoading(true);
     const baseUrl =
       process.env.VITE_PROD_ENV === "true"
         ? process.env.VITE_PROD_BASE_API
@@ -92,8 +102,13 @@ function Session() {
     const url = `${baseUrl}/${path}`;
 
     if (testMode === "true") {
-      let responseItem = createMessageItem("response","Response test mode","");
+      let responseItem = createMessageItem(
+        "response",
+        "Response test mode",
+        ""
+      );
       setMessageItems((messageItems) => [...messageItems, responseItem]);
+      setLoading(false);
     } else {
       const resp = await fetch(url, {
         method: "POST",
@@ -105,9 +120,11 @@ function Session() {
         }),
       });
       const data = await resp.json();
+
       let result = data.message;
-      let responseItem = createMessageItem("response", result,"");
+      let responseItem = createMessageItem("response", result, "");
       setMessageItems((messageItems) => [...messageItems, responseItem]);
+      setLoading(false);
     }
   };
 
@@ -117,22 +134,18 @@ function Session() {
 
     const bannedWords = filterBannedWords(prompt);
     if (bannedWords.length > 0) {
-      //output admin warning about words to transcript
-      // let questionItem = {
-      //   type: "admin",
-      //   content: `We can not process and discuss input containing
-      //   banned words: ${bannedWords.join(", ")}. See list of banned words 
-      //   on home page.`,
-      // };
-      let questionItem =createMessageItem("admin","We can not process and discuss input \
-        containing: BANNEDWORDS. See list of banned words on home page.",bannedWords.join(", "))
+      let questionItem = createMessageItem(
+        "admin",
+        "We can not process and discuss input \
+        containing: BANNEDWORDS. See list of banned words on home page.",
+        bannedWords.join(", ")
+      );
       setMessageItems((messageItems) => [...messageItems, questionItem]);
     } else {
       // ok to process prompt
       // output to transcript
-      let questionItem = createMessageItem("client",prompt,"");
+      let questionItem = createMessageItem("client", prompt, "");
       setMessageItems((messageItems) => [...messageItems, questionItem]);
-
       fetchResponseData("processClient", prompt);
       setPrompt("");
     }
@@ -143,6 +156,16 @@ function Session() {
       <Border></Border>
       <Navbar />
       <section className="cui">
+        {/* (loading == true) ? (
+        <ClipLoader
+          color="red"
+          loading={loading}
+          cssOverride={override}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /> */}
+        )
         <form>
           <div style={{ margin: "3rem 0" }} className="button-align">
             <textarea
@@ -163,7 +186,6 @@ function Session() {
             />
           </div>
         </form>
-
         <div className="transcript-column">
           <div className="transcript-header">
             <div>Transcript</div>
@@ -177,11 +199,18 @@ function Session() {
               />
             </div>
           </div>
-          {loading == true ? (
-            <p style={{ margin: "30px 0" }}>Loading ...</p>
-          ) : (
-            <Transcript items={messageItems} />
-          )}
+          {/* {loading == true ? (
+             <ClipLoader
+             color="red"
+             loading={loading}
+             cssOverride={override}
+             size={150}
+             aria-label="Loading Spinner"
+             data-testid="loader"
+           />
+          ) : ( */}
+          <Transcript items={messageItems} />
+          {/* )} */}
         </div>
       </section>
     </div>

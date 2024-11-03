@@ -29,8 +29,8 @@ function Rules() {
           Eleanor below.
         </p>
 
-        <div class="cards-container">
-          <div class="card-img">
+        <div className="cards-container">
+          <div className="card-img">
             <img
               className="fit-picture"
               src="./eleanor60.webp"
@@ -39,9 +39,9 @@ function Rules() {
           </div>
 
           <div
-            class="card"
+            className="card"
           >
-            <div class="card-container">
+            <div className="card-container">
               <h2>
                 <b>Eleanor</b>
               </h2>
@@ -84,8 +84,8 @@ function Rules() {
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-container">
+          <div className="card">
+            <div className="card-container">
               <h2>
                 <b>Rogerian Therapy Focuses on the Individual</b>
               </h2>
@@ -100,8 +100,8 @@ function Rules() {
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-container">
+          <div className="card">
+            <div className="card-container">
               <h2>
                 <b>Information Exchanged by Eleanor and the Client</b>
               </h2>
