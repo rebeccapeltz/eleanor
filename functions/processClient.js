@@ -12,7 +12,8 @@ exports.handler = async (request, context) => {
   const genAI = new GoogleGenerativeAI(process.env.GEN_AI_KEY);
 
   const generationConfig = {
-    responseMimeType: 'text/plain', 
+    responseMimeType: 'text/plain',
+    maxOutputTokens: 2000, 
   };
   const model = genAI.getGenerativeModel({model: "gemini-1.5-pro"});
   model.startChat({ generationConfig });

@@ -31,7 +31,6 @@ some front end challenges like making sure that when there are many inputs from 
 
 I have experience coding front end applications, but I'm not a designer so I struggled a little with the design and colors.
 
-I'm still working on putting up a loading indicatore while waiting for a response from Gemini.
 
 ### AI Responses in a Therapy Session
 
@@ -78,6 +77,7 @@ I learned how to:
 - create a running transcript of the conversation and make it downloadable
 - do my own input word checking to prevent an API call that could end up in an unwanted conversation theme
 - read how the Gemini API has some options that could prevent an unwanted conversation theme
+- how to limit output to 2000 tokens (without this I would run out of tokens and the responses were getting too long)
 
 ## What's next for Eleanor
 

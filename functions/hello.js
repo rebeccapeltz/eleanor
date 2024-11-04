@@ -20,9 +20,11 @@ exports.handler = async (event, context) => {
 
   const generationConfig = {
     responseMimeType: "text/plain",
+    maxOutputTokens: 2000, 
   };
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
   model.startChat({ generationConfig });
+  model.max_output_tokens = 2000;
   const result = await model.generateContent(prompt);
 
   return {

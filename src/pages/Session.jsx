@@ -5,18 +5,17 @@ import Border from "../components/Border.jsx";
 import Transcript from "../components/Transcript.jsx";
 import Navbar from "../components/Navbar.jsx";
 import { filterBannedWords } from "../functions/utils.js";
-import ClipLoader from "react-spinners/ClipLoader";
 
 const testMode = process.env.VITE_TEST_MODE;
 const createMessageItem = (type, content, bannedWords) => {
   return { type: type, content: content, bannedWords: bannedWords };
 };
 
-const override = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-};
+function getBaseURL(){
+   return process.env.VITE_PROD_ENV === "true"
+          ? process.env.VITE_PROD_BASE_API
+          : process.env.VITE_DEV_BASE_API;
+}
 
 function Session() {
   const [loading, setLoading] = useState(false);
@@ -24,18 +23,17 @@ function Session() {
   const [prompt, setPrompt] = useState("");
   const [messageItems, setMessageItems] = useState([]);
 
+
   useEffect(() => {
     setLoading(true);
     setMessageItems([]);
     setPrompt("");
 
-    const fetchDataHello = async (path) => {
+    const fetchDataHello = async () => {
       setLoading(true);
-      const baseUrl =
-        process.env.VITE_PROD_ENV === "true"
-          ? process.env.VITE_PROD_BASE_API
-          : process.env.VITE_DEV_BASE_API;
-      const url = `${baseUrl}/${path}`;
+      debugger
+      const baseUrl = getBaseURL();
+      const url = `${baseUrl}/hello`;
       let json = {};
       if (testMode === "true") {
         json = { message: "Eleanor test mode" };
@@ -43,7 +41,7 @@ function Session() {
         const data = await fetch(url);
         json = await data.json();
       }
-
+      setLoading(false);
       // create messages
       let adminItem = createMessageItem("admin", "Welcome", "");
       // adminItem is a data object
@@ -51,19 +49,17 @@ function Session() {
 
       let responseItem = { type: "response", content: json.message };
       setMessageItems((messageItems) => [...messageItems, responseItem]);
-      setLoading(false);
-    };
+
+    }
+
     fetchDataHello("hello").catch(console.error);
   }, []);
 
   async function convertHTMLtoText(html) {
-    const baseUrl =
-      process.env.VITE_PROD_ENV === "true"
-        ? process.env.VITE_PROD_BASE_API
-        : process.env.VITE_DEV_BASE_API;
-    const url = `${baseUrl}/${path}`;
+    const baseUrl = getBaseURL();
+    const url = `${baseUrl}/convert`;
 
-    const resp = await fetch(`{baseUrl}/.netlify/functions/convert`, {
+    const resp = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,6 +73,7 @@ function Session() {
     return result;
   }
   async function download() {
+    debugger
     var aLink = document.body.appendChild(document.createElement("a"));
     aLink.download = "export.txt";
     let html = document.getElementById("transcript").innerHTML;
@@ -93,14 +90,10 @@ function Session() {
     aLink.click();
   }
 
-  const fetchResponseData = async (path, clientPrompt) => {
+  const fetchResponseData = async (clientPrompt) => {
     setLoading(true);
-    const baseUrl =
-      process.env.VITE_PROD_ENV === "true"
-        ? process.env.VITE_PROD_BASE_API
-        : process.env.VITE_DEV_BASE_API;
-    const url = `${baseUrl}/${path}`;
-
+    const baseUrl = getBaseURL();
+    const url = `${baseUrl}/processClient`
     if (testMode === "true") {
       let responseItem = createMessageItem(
         "response",
@@ -108,7 +101,6 @@ function Session() {
         ""
       );
       setMessageItems((messageItems) => [...messageItems, responseItem]);
-      setLoading(false);
     } else {
       const resp = await fetch(url, {
         method: "POST",
@@ -124,8 +116,8 @@ function Session() {
       let result = data.message;
       let responseItem = createMessageItem("response", result, "");
       setMessageItems((messageItems) => [...messageItems, responseItem]);
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   const handleSubmit = (e) => {
@@ -146,7 +138,7 @@ function Session() {
       // output to transcript
       let questionItem = createMessageItem("client", prompt, "");
       setMessageItems((messageItems) => [...messageItems, questionItem]);
-      fetchResponseData("processClient", prompt);
+      fetchResponseData(prompt);
       setPrompt("");
     }
   };
@@ -156,16 +148,6 @@ function Session() {
       <Border></Border>
       <Navbar />
       <section className="cui">
-        {/* (loading == true) ? (
-        <ClipLoader
-          color="red"
-          loading={loading}
-          cssOverride={override}
-          size={150}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        /> */}
-        )
         <form>
           <div style={{ margin: "3rem 0" }} className="button-align">
             <textarea
@@ -199,17 +181,11 @@ function Session() {
               />
             </div>
           </div>
-          {/* {loading == true ? (
-             <ClipLoader
-             color="red"
-             loading={loading}
-             cssOverride={override}
-             size={150}
-             aria-label="Loading Spinner"
-             data-testid="loader"
-           />
-          ) : ( */}
-          <Transcript items={messageItems} />
+           {loading == true ? (
+            <div style={{ margin: "30px 0", fontSize:"4rem",color:"#F7D6D0",backgroundColr:"#281b0d" }}>Loading ...</div>
+          ) : (
+            <Transcript items={messageItems} />
+          )}
           {/* )} */}
         </div>
       </section>

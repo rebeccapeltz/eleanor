@@ -31,14 +31,14 @@ function Message(item) {
     return (
       <div>
         <div className="client">Client</div>
-        <p className="msg"><Markdown options={{ wrapper: 'article' }}>{item.props.content}</Markdown></p>
+        <div className="msg"><Markdown options={{ wrapper: 'article' }}>{item.props.content}</Markdown></div>
       </div>
     );
   } else if (item.props.type == "response") {
     return (
       <div>
         <div className="eleanor">Eleanor</div>
-        <p className="msg"><Markdown options={{ wrapper: 'article' }}>{item.props.content}</Markdown></p>
+        <div className="msg"><Markdown options={{ wrapper: 'article' }}>{item.props.content}</Markdown></div>
       </div>
     );
   }
