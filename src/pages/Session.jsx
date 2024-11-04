@@ -31,7 +31,6 @@ function Session() {
 
     const fetchDataHello = async () => {
       setLoading(true);
-      debugger
       const baseUrl = getBaseURL();
       const url = `${baseUrl}/hello`;
       let json = {};
@@ -73,7 +72,6 @@ function Session() {
     return result;
   }
   async function download() {
-    debugger
     var aLink = document.body.appendChild(document.createElement("a"));
     aLink.download = "export.txt";
     let html = document.getElementById("transcript").innerHTML;
