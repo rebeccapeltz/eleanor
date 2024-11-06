@@ -79,7 +79,7 @@ function About() {
               <Zoom>
                 <img
                   width="60%"
-                  src="./eliza-transcript.jpg"
+                  src="./eliza-callouts.png"
                   alt="Eliza transcript"
                 />
                 <figcaption>Eliza Transcript from 1969</figcaption>
