@@ -1,5 +1,11 @@
 # React + Vite
 
+## Local Testing of Function
+
+```
+netlify dev --debug
+```
+
 netlify DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
 https://github.com/netlify/cli/issues/6836
 

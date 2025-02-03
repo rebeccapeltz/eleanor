@@ -1,2 +1,6 @@
 [functions]
   directory = "functions"
+
+[dev]
+targetPort = 5173 # Your local dev server port
+port = 8888 # Netlify Dev server port
